@@ -4,7 +4,6 @@ import { loginSchema } from "./lib/zod";
 import { db } from "./lib/db";
 import bcrypt from "bcryptjs";
 
-// Notice this is only an object, not a full Auth.js instance
 export default {
   providers: [
     Credentials({

@@ -4,14 +4,17 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/actions/auth-actions";
 
+import { useAppDispatch } from "@/store";
+import { clearUser } from "@/store/user/userSlice";
+
 const LogoutButton = () => {
+  const dispatch = useAppDispatch();
   const handleClick = async () => {
     await logoutAction();
+    dispatch(clearUser());
     signOut({
       callbackUrl: "/login",
     });
-
-    console.log("Logout");
   };
 
   return <Button onClick={handleClick}>Logout</Button>;

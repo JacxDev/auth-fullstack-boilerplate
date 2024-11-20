@@ -25,9 +25,8 @@ export const loginAction = async (values: z.infer<typeof loginSchema>) => {
 
 export const logoutAction = async () => {
   try {
-    const session = await auth()
-    console.log({session})
-    console.log("Session logout")
+    const session = await auth();
+    console.log(`Session logout: ${session}`);
   } catch (error) {
     if (error instanceof AuthError) {
       return { error: error.cause?.err?.message };

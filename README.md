@@ -18,8 +18,19 @@ Make sure you have the following installed on your system before starting: Node.
 
 5. Generate your authentication secret: `npx auth secret`
 
+6. Generate seed example: `npx prisma db seed`
+
 6. Start the development server: `npm run dev` (or `yarn dev`, `pnpm dev`, or `bun dev`)
 
 ## Learn More
 
 To learn more about the tools and frameworks used in this project, check out the following resources: [Next.js Documentation](https://nextjs.org/docs), [Prisma Documentation](https://www.prisma.io/docs), [Auth.js Documentation](https://authjs.dev/docs), and [PostgreSQL Documentation](https://www.postgresql.org/docs/).
+
+Notes
+## Steps changes Prisma
+# Validar el archivo schema.prisma
+npx prisma validate
+# Generar el cliente Prisma
+npx prisma generate
+# Crear migración y aplicar cambios en desarrollo
+npx prisma migrate dev --name nombre_de_la_migracion

@@ -5,6 +5,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/store";
+import { setUser } from "@/store/user/userSlice";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,10 +20,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { loginAction } from "@/actions/auth-actions";
+import { getUserAction } from "@/actions/user-actions";
 
 const FormLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -37,7 +41,13 @@ const FormLogin = () => {
       if (response.error) {
         setError(response.error);
       } else {
-        router.push("/dashboard");
+        const userData = await getUserAction(values.email);
+        if (userData) {
+          dispatch(setUser(userData));
+          router.push("/dashboard");
+        } else {
+          setError("Usuario no encontrado");
+        }
       }
     });
   };

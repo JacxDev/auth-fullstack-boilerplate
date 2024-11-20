@@ -23,3 +23,9 @@ export const registerSchema = object({
     .max(32, "Password must be less than 32 characters"),
   name: string(),
 });
+
+export const userSchema = object({
+  id: string().uuid(),
+  email: string().email(),
+  name: string(),
+});
